@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="js/periodic_data.js"></script>
+        <script src="js/script.js"></script>
+        <title>Periodic Table</title>
+    </head>
+    <body>
+        <div id="app">
+            <!--search box-->
+            <div class="search-box">
+                <input class="search-txt" type="text" placeholder="Search periodic table" v-model="searchQuery" @click="isHidden = false" />
+                <a class="search-btn" href="#">
+                    <i class="fa fa-search"></i>
+                </a>
+                <!--select box-->
+                <div class="categories">
+                    <label for="selectCategory">Category:</label>
+                    <select id="selectCategory" class="dropdown" v-model="selected" @click="isHidden = true">
+                        <option value="All" @click="clear">All</option>
+                        <option value="Nonmetals">Non Metals</option>
+                        <option value="Alkali metals">Alkali Metals</option>
+                        <option value="Alkaline Earth">Alkaline Earth</option>
+                        <option value="Basic Metal">Basic Metal</option>
+                        <option value="Halogeen">Halogeen</option>
+                        <option value="Noble Gas">Noble Gas</option>
+                        <option value="Lanthanides">Lanthanides</option>
+                        <option value="Actinides">Actinides</option>
+                        <option value="Semi Metal">Semi Metal</option>
+                        <option value="Transition Metal">Transition Metal</option>
+                    </select>
+                </div>
+                <br />
+                <!--display element data-->
+                <div class="element-items" v-if="!isHidden || selected === 'All'">
+                    <div class="element-item" v-bind:style="{backgroundColor: backgroundChanger($index, element)}" v-for="element in filterItems(elements)" :key="element.name">
+                        {{ element.name }}<br />
+                        {{ element.shortcut }}<br />
+                        Atomic number: {{ element.atomnumber }}<br />
+                        Atomic mass: {{ element.atomic_mass}}<br />
+                        {{ element.type }}
+                    </div>
+                </div>
+                <div v-else-if="selected !== 'All'">
+                    <div class="element-items">
+                        <div class="element-item" v-bind:style="{backgroundColor: backgroundChanger($index, element)}" v-for="element in filteredCategories">
+                            {{ element.name }}<br />
+                            {{ element.shortcut }}<br />
+                            Atomic number: {{ element.atomnumber }}<br />
+                            Atomic mass: {{ element.atomic_mass}}<br />
+                            {{ element.type }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
