@@ -106,9 +106,9 @@ window.onload = function(){
             basicMetal:'#CC99FF',
             halogeen:'#04D307',
             nobleGas:'#0AA9ED',
-            lanthanides:'#A5F04D',
+            lanthanides:'#97d94a',
             actinides:'#8EC73C',
-            semiMetal:'#85FC0A',
+            semiMetal:'#6ed108',
             transMetal:'#78C1C4'
 
         }
